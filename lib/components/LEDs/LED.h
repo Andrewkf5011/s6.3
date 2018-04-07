@@ -32,17 +32,17 @@ class LED
         PinName getPinName();
 
         /**
-         * Turns the LED on.
+         * @brief Turns the LED on.
          */
         void on();
 
         /**
-         * Turns the LED off.
+         * @brief Turns the LED off.
          */
         void off();
 
         /**
-         * Toggles the state of the LED.
+         * @brief Toggles the state of the LED.
          */
         void toggle();
 };

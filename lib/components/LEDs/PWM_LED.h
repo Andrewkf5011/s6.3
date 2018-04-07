@@ -8,7 +8,7 @@
  *        modualtion.
  *
  * Version: 1.0
- * Date: 25/03/2018
+ * Date: 07/04/2018
  * Originally Created: 25/03/2018
  */
 class PWM_LED
@@ -47,6 +47,11 @@ class PWM_LED
          * @brief Turns the LED off.
          */
         void off();
+
+        /**
+         * @brief Toggles the state of the LED.
+         */
+        void toggle();
 };
 
 #endif // PWM_LED_H

@@ -1,25 +1,32 @@
 #include <mbed.h>
 #include <rtos.h>
 #include <mbed_events.h>
+#include "components.h"
 
 Serial pc(USBTX, USBRX);
-
-DigitalOut red(LED1,1);
-void flash(void){
-    red = !red;
-}
-
-DigitalOut green(LED2,1);
-void blink(void){
-    pc.printf("This is not in an ISR so I can do long (time) operations\n");
-    green = !green;
-}
 Thread worker;
+EventQueue queue;
 
-EventQueue queue ;
+AssignmentBoard board;
+LED redLED(board.K64F_RED_LED);
+LED greenLED(board.SHIELD_GREEN_LED);
 
-InterruptIn sw(SW2);
-int main() {
+InterruptIn sw(board.K64F_SW2);
+
+void flash(void)
+{
+    redLED.toggle();
+}
+
+void blink(void)
+{
+    pc.printf("This is not in an ISR so I can do long (time) operations\n");
+    greenLED.toggle();
+}
+
+
+int main()
+{
     sw.rise(flash); /* executes as an ISR */
     sw.fall(queue.event(blink));
     worker.start(callback(&queue, &EventQueue::dispatch_forever ));

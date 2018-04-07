@@ -25,3 +25,8 @@ void PWM_LED::off()
 {
     pwmOut.write(1);
 }
+
+void PWM_LED::toggle()
+{
+    pwmOut = !pwmOut;
+}
